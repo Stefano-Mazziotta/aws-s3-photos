@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 
 function App() {
@@ -15,6 +15,13 @@ function App() {
   const handleChangeFile = (event) => {
     setInputs(prevInputs => ( {...prevInputs, file: event.target.files[0]} ))
   }
+
+  useEffect(() => {
+    const apiUrl = 'http://localhost:3000/api/photos'
+    fetch(apiUrl)
+      .then(data => data.json())
+      .then(data => console.log(data));
+  }, [])
 
 
   const handleSubmit = async (event) => {

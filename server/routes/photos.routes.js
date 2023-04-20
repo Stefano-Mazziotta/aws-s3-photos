@@ -1,5 +1,5 @@
 import { Router } from "express"; 
-import { uploadFileToS3 } from "../s3.js";
+import { getFilesFromS3, uploadFileToS3 } from "../s3.js";
 
 const routerPhotos = Router();
 routerPhotos.post("/", async (request, response) => {
@@ -9,8 +9,11 @@ routerPhotos.post("/", async (request, response) => {
     response.json(responseS3)
 });
 
-routerPhotos.get("/", (request, response) => {  
-    response.send('get photo')
+routerPhotos.get("/", async (request, response) => {  
+    console.log('get all photos')
+
+    const responseS3 = await getFilesFromS3();
+    response.json(responseS3)
 });
 
     

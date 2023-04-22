@@ -1,4 +1,5 @@
 import { Router } from "express"; 
+import fs from 'fs'
 import { getFileFromS3, getFilesFromS3, uploadFileToS3 } from "../s3.js";
 
 const routerFiles = Router();
@@ -24,6 +25,15 @@ routerFiles.get("/:fileName", async (request, response) => {
     const responseS3 = await getFileFromS3(fileName)
     response.json(responseS3.$metadata)
 });
+
+routerFiles.get("/download/:fileName", async (request, response) => {
+    const { fileName } = request.params
+    console.log(`download "${fileName}" file`)
+
+    const responseS3 = await getFileFromS3(fileName)
+    responseS3.Body.pipe(fs.createWriteStream(`./files/${fileName}`))
+    response.send("file downloaded")
+})
 
     
 export default routerFiles;

@@ -57,6 +57,16 @@ function App() {
 
   }
 
+  const handleClickDownloadFile = async () => {
+
+    const { fileName } = searchParams 
+    
+    const apiUrl = `http://localhost:3000/api/files/download/${fileName}`
+    const response = await fetch(apiUrl)
+
+    console.log(response)
+  }
+
   const handleChangeFileName = (event) => {
     setSearchParams(previousSearchParams => ( {...previousSearchParams, fileName: event.target.value} ))
   }
@@ -73,6 +83,7 @@ function App() {
       <form className="form-container" onSubmit={handleSubmitSearchFile}>
         <input onChange={handleChangeFileName} type="text" name='fileName' placeholder="File name"/>
         <input className='btn-submit' type="submit" value="search file" />
+        <button onClick={handleClickDownloadFile}>Download file</button>
       </form>
     </div>
   )

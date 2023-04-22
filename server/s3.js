@@ -1,5 +1,5 @@
 import fs from 'fs'
-import { S3Client, PutObjectCommand, ListObjectsCommand } from "@aws-sdk/client-s3"
+import { S3Client, PutObjectCommand, ListObjectsCommand, GetObjectCommand } from "@aws-sdk/client-s3"
 import { AWS_BUCKET_REGION, AWS_BUCKET_NAME, AWS_PUBLIC_KEY, AWS_SECRET_KEY } from './config.js'
 
 const s3Client = new S3Client({
@@ -29,5 +29,15 @@ export async function getFilesFromS3(){
     }
 
     const command = new ListObjectsCommand(getFilesParams)
+    return await s3Client.send(command)
+}
+
+export async function getFileFromS3(fileName){
+    const getFileParams = {
+        Bucket: AWS_BUCKET_NAME,
+        Key: fileName
+    }
+
+    const command = new GetObjectCommand(getFileParams)
     return await s3Client.send(command)
 }

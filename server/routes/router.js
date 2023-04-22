@@ -1,5 +1,5 @@
-import routerPhotos from "./photos.routes.js"
+import routerFiles from "./files.routes.js"
 
 export default function apiRouter(server){
-    server.use('/api/photos', routerPhotos)
+    server.use('/api/files', routerFiles)
 }

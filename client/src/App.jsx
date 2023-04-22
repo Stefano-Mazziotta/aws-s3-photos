@@ -21,7 +21,7 @@ function App() {
   }
 
   useEffect(() => {
-    const apiUrl = 'http://localhost:3000/api/photos'
+    const apiUrl = 'http://localhost:3000/api/files'
     fetch(apiUrl)
       .then(data => data.json())
       .then(data => console.log(data));
@@ -36,7 +36,7 @@ function App() {
       body.append(name, inputs[name]);
     }
 
-    const apiUrl = 'http://localhost:3000/api/photos'
+    const apiUrl = 'http://localhost:3000/api/files'
     const response = await fetch(apiUrl, {
       method: 'POST',
       body: body
@@ -50,7 +50,7 @@ function App() {
 
     const { fileName } = searchParams 
     
-    const apiUrl = `http://localhost:3000/api/photos/${fileName}`
+    const apiUrl = `http://localhost:3000/api/files/${fileName}`
     const response = await fetch(apiUrl)
 
     console.log(response)

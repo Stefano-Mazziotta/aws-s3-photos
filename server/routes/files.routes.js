@@ -32,7 +32,7 @@ routerFiles.get("/download/:fileName", async (request, response) => {
 
     const responseS3 = await getFileFromS3(fileName)
     responseS3.Body.pipe(fs.createWriteStream(`./files/${fileName}`))
-    response.send("file downloaded")
+    response.json({message: "Archivo descargado"})
 })
 
     

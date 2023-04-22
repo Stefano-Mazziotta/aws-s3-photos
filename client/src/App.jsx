@@ -83,8 +83,8 @@ function App() {
       <form className="form-container" onSubmit={handleSubmitSearchFile}>
         <input onChange={handleChangeFileName} type="text" name='fileName' placeholder="File name"/>
         <input className='btn-submit' type="submit" value="search file" />
-        <button onClick={handleClickDownloadFile}>Download file</button>
       </form>
+      <button onClick={handleClickDownloadFile}>Download file</button>
     </div>
   )
 }

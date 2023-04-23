@@ -90,6 +90,7 @@ function App() {
 
         <button className='btn-submit' onClick={handleClickDownloadFile}>Download file</button>        
       </section>
+      <img src="http://localhost:3000/horizontal-small.jpg" alt="as" />
     </div>
   )
 }

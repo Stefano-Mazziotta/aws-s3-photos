@@ -23,11 +23,12 @@ function runServer(){
 
     const server = express()   
 
+    server.use(express.static('files'))
     server.use(cors(corsOptions))
     server.use(fileUpload({
         useTempFiles : true,
         tempFileDir : './tmp'
-    }))
+    }))   
 
     apiRouter(server)
     

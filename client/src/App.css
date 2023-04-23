@@ -6,21 +6,41 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 2rem;
 }
 
-.App .form-container{
+.App .section-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    border: 1px solid black;
+    padding: 1rem;
+}
+
+.App .section-container .btn-submit{
+    padding: 10px 0px;
+    cursor: pointer;
+    transition: all ease .3s;
+}
+.App .section-container .btn-submit:hover{
+    opacity: 0.6;
+}
+
+.App .section-container .title {
+    font-family: system-ui;
+    border-top: 1px solid grey;
+    padding-top: 1rem;
+}
+
+.App .section-container .form-container{
     display: flex;
     flex-direction: column;
     gap: 2rem;
 }
 
-.App .form-container input[type=text]{
+.App .section-container .form-container input[type=text]{
     background-color: white;
     color: black;
     padding: 5px;
-}
-
-.App .form-container .btn-submit{
-    padding: 20px 0px;
-    cursor: pointer;
 }

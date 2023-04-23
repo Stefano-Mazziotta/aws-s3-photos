@@ -73,18 +73,23 @@ function App() {
 
   return (
     <div className="App">
-      <form className="form-container" onSubmit={handleSubmit}>
-        <input onChange={handleChangeTitle} type="text" name='title' placeholder="title"/>
-        <input onChange={handleChangeFile} type="file" name='file'/>
-        <input className='btn-submit' type="submit" value="upload image" />
-      </form>
+      <section className='section-container'>
+        <form className="form-container" onSubmit={handleSubmit}>
+          <input onChange={handleChangeTitle} type="text" name='title' placeholder="title"/>
+          <input onChange={handleChangeFile} type="file" name='file'/>
+          <input className='btn-submit' type="submit" value="upload image" />
+        </form>
+      </section>
 
-      <h3 style={{marginTop:"40px"}}>search file from S3</h3>
-      <form className="form-container" onSubmit={handleSubmitSearchFile}>
-        <input onChange={handleChangeFileName} type="text" name='fileName' placeholder="File name"/>
-        <input className='btn-submit' type="submit" value="search file" />
-      </form>
-      <button onClick={handleClickDownloadFile}>Download file</button>
+      <section className='section-container'>
+        <h3 className='title'>search file from S3</h3>
+        <form className="form-container" onSubmit={handleSubmitSearchFile}>
+          <input onChange={handleChangeFileName} type="text" name='fileName' placeholder="File name"/>
+          <input className='btn-submit' type="submit" value="search file" />
+        </form>
+
+        <button className='btn-submit' onClick={handleClickDownloadFile}>Download file</button>        
+      </section>
     </div>
   )
 }

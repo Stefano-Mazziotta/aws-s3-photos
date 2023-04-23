@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import './App.css'
+import { downloadFileToServer, getFile, getFileUrl, getFiles, uploadFileToS3 } from './services/files'
 
 function App() {
 
@@ -23,27 +24,15 @@ function App() {
   }
 
   useEffect(() => {
-    const apiUrl = 'http://localhost:3000/api/files'
-    fetch(apiUrl)
-      .then(data => data.json())
-      .then(data => console.log(data));
+    getFiles().then(
+      data => console.log(data)
+    )
   }, [])
 
 
   const handleSubmit = async (event) => {
     event.preventDefault()
-
-    const body = new FormData()
-    for(const name in inputs) {
-      body.append(name, inputs[name]);
-    }
-
-    const apiUrl = 'http://localhost:3000/api/files'
-    const response = await fetch(apiUrl, {
-      method: 'POST',
-      body: body
-    });
-
+    const response = uploadFileToS3(inputs)
     console.log(response)
   }
 
@@ -51,33 +40,18 @@ function App() {
     event.preventDefault()
 
     const { fileName } = searchParams 
-    
-    const apiUrl = `http://localhost:3000/api/files/${fileName}`
-    const response = await fetch(apiUrl)
-
-    console.log(response)
-
+    const file = getFile(fileName)
   }
 
   const handleClickDownloadFile = async () => {
-
     const { fileName } = searchParams 
-    
-    const apiUrl = `http://localhost:3000/api/files/download/${fileName}`
-    const response = await fetch(apiUrl)
-
-    console.log(response)
+    const response = downloadFileToServer(fileName)
   }
 
   const handleClickGetFileUrl = async () => {
-
     const { fileName } = searchParams 
-    
-    const apiUrl = `http://localhost:3000/api/files/url/${fileName}`
-    const response = await fetch(apiUrl)
-    const data = await response.json()
-
-    setFileUrl(data)
+    const url = getFileUrl(fileName)
+    setFileUrl(url)
   }
 
   const handleChangeFileName = (event) => {

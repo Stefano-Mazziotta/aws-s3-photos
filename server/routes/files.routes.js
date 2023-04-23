@@ -1,6 +1,6 @@
 import { Router } from "express"; 
 import fs from 'fs'
-import { getFileFromS3, getFilesFromS3, uploadFileToS3 } from "../s3.js";
+import { getFileFromS3, getFilesFromS3, uploadFileToS3, getFileUrl } from "../s3.js";
 
 const routerFiles = Router();
 routerFiles.post("/", async (request, response) => {
@@ -35,5 +35,12 @@ routerFiles.get("/download/:fileName", async (request, response) => {
     response.json({message: "Archivo descargado"})
 })
 
+routerFiles.get("/url/:fileName", async (request, response) => {
+    const { fileName } = request.params
+    console.log(`get "${fileName} url."`)
+
+    const url = await getFileUrl(fileName)
+    response.json(url)
+})
     
 export default routerFiles;

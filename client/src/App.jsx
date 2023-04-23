@@ -12,6 +12,8 @@ function App() {
     fileName: ''
   })
 
+  const [ fileUrl, setFileUrl ] = useState('')
+
   const handleChangeTitle = (event) => {
     setInputs(prevInputs => ( {...prevInputs, title: event.target.value} ))
   }
@@ -67,6 +69,17 @@ function App() {
     console.log(response)
   }
 
+  const handleClickGetFileUrl = async () => {
+
+    const { fileName } = searchParams 
+    
+    const apiUrl = `http://localhost:3000/api/files/url/${fileName}`
+    const response = await fetch(apiUrl)
+    const data = await response.json()
+
+    setFileUrl(data)
+  }
+
   const handleChangeFileName = (event) => {
     setSearchParams(previousSearchParams => ( {...previousSearchParams, fileName: event.target.value} ))
   }
@@ -85,12 +98,18 @@ function App() {
         <h3 className='title'>search file from S3</h3>
         <form className="form-container" onSubmit={handleSubmitSearchFile}>
           <input onChange={handleChangeFileName} type="text" name='fileName' placeholder="File name"/>
-          <input className='btn-submit' type="submit" value="search file" />
+          <input className='btn-submit' type="submit" value="search file in S3" />
         </form>
 
-        <button className='btn-submit' onClick={handleClickDownloadFile}>Download file</button>        
+        <button className='btn-submit' onClick={handleClickDownloadFile}>Download file to server</button>        
+        <button className='btn-submit' onClick={handleClickGetFileUrl}>Get S3 file url</button>        
       </section>
-      <img src="http://localhost:3000/horizontal-small.jpg" alt="as" />
+      <img src="http://localhost:3000/horizontal-small.jpg" alt="image" />
+      {fileUrl && 
+        <div className='img-container'>
+          <img src={fileUrl} alt="image" />
+        </div>       
+      }
     </div>
   )
 }
